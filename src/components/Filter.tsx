@@ -11,7 +11,7 @@ const Filter = () => {
     })))
     const [value, setValue] = useState('')
 
-    const debouncedSetFilter = useDebounceCallback(setFilter, 500)
+    const debouncedSetFilter = useDebounceCallback(setFilter, 800)
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setValue(e.target.value)

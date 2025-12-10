@@ -5,9 +5,3 @@ export const fetchUsers = async(): Promise<User[]> => {
     const data = await response.json()
     return data
 }
-
-// export const fetchUserById = async(id: number): Promise<User> => {
-//     const response = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`)
-//     const data = await response.json()
-//     return data
-// }
