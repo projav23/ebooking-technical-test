@@ -6,6 +6,8 @@ import { fetchUsers } from '../client/fetchUsers'
 
 interface UserStore {
     users: User[]
+    viewMode: 'list' | 'grid'
+    setViewMode: (viewMode: 'list' | 'grid') => void
     filter: string
     isLoading: boolean
     error: string | null
@@ -18,10 +20,12 @@ export const useStore = create<UserStore>()(
         persist(
         (set) => ({
             users: [],
+            viewMode: 'list',
             filter: '',
             isLoading: false,
             error: null,
             setFilter: (filter) => set({ filter }),
+            setViewMode: (viewMode) => set({ viewMode }),
             loadUsers: async () => {
                 set({ isLoading: true, error: null })
                 try {

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useStore } from '../store/useStore'
 import { useShallow } from 'zustand/shallow'
 import type { MouseEvent } from 'react'
@@ -14,12 +14,13 @@ import Filter from '../components/Filter'
 type ViewMode = 'list' | 'grid'
 
 const UsersPage = () => {
-    const [viewMode, setViewMode] = useState<ViewMode>('list')
-    const { users, loadUsers, filter } = useStore(
+    const { users, loadUsers, filter, viewMode, setViewMode } = useStore(
         useShallow((state) => ({
             users: state.users,
             loadUsers: state.loadUsers,
             filter: state.filter,
+            viewMode: state.viewMode,
+            setViewMode: state.setViewMode,
         }))
     )
 
@@ -52,13 +53,13 @@ const UsersPage = () => {
                         <ViewModuleIcon />
                     </ToggleButton>
                 </ToggleButtonGroup>
-            </Box>
+            </Box> 
 
             <Box
                 sx={{
                     display: viewMode === 'grid' ? 'grid' : 'flex',
-                    gridTemplateColumns: viewMode === 'grid' ? 'repeat(auto-fill, minmax(280px, 1fr))' : undefined,
-                    flexDirection: viewMode === 'list' ? 'column' : undefined,
+                    gridTemplateColumns: 'auto auto auto auto',
+                    flexDirection: viewMode === 'list' ? 'column' : 'row',
                     gap: 2,
                 }}
             >
