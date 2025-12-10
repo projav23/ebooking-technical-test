@@ -1,0 +1,38 @@
+import { create } from 'zustand'
+import { devtools } from 'zustand/middleware'
+
+import type { User } from '@/types/user'
+import { fetchUsers } from '@/api/fetchUsers'
+
+interface UserStore {
+    users: User[]
+    filter: string
+    isLoading: boolean
+    error: string | null
+    setFilter: (filter: string) => void
+    loadUsers: () => Promise<void>
+}
+
+export const useStore = create<UserStore>()(
+    devtools(
+        (set) => ({
+            users: [],
+            filter: '',
+            isLoading: false,
+            error: null,
+            setFilter: (filter) => set({ filter }),
+            loadUsers: async () => {
+                set({ isLoading: true, error: null })
+                try {
+                    const users = await fetchUsers()
+                    set({ users, isLoading: false })
+                } catch (error) {
+                    set({ error: (error as Error).message, isLoading: false })
+                }
+            },
+        }),
+        {
+            name: 'users-store',
+        }
+    )
+)
