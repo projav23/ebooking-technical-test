@@ -1,8 +1,8 @@
 import { create } from 'zustand'
-import { devtools } from 'zustand/middleware'
+import { devtools, persist } from 'zustand/middleware'
 
-import type { User } from '@/types/user'
-import { fetchUsers } from '@/api/fetchUsers'
+import type { User } from '../types/user'
+import { fetchUsers } from '../client/fetchUsers'
 
 interface UserStore {
     users: User[]
@@ -15,6 +15,7 @@ interface UserStore {
 
 export const useStore = create<UserStore>()(
     devtools(
+        persist(
         (set) => ({
             users: [],
             filter: '',
@@ -34,5 +35,5 @@ export const useStore = create<UserStore>()(
         {
             name: 'users-store',
         }
-    )
+    ))
 )

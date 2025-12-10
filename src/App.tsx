@@ -1,11 +1,16 @@
-import { useState } from 'react'
-
-function App() {
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import UsersPage from './views/UsersPage'
+import UserDetailsPage from './views/UserDetailsPage'
+const App = () => {
 
   return (
-    <>
-      <h1>Prueba Tecnica</h1>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<UsersPage />} />
+        <Route path="/user/:id" element={<UserDetailsPage />} />
+      </Routes>
+    </BrowserRouter>
+
   )
 }
 
