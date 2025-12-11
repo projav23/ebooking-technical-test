@@ -3,6 +3,7 @@ import { useStore } from '../store/useStore'
 import { useShallow } from 'zustand/shallow'
 import type { MouseEvent } from 'react'
 import Box from '@mui/material/Box'
+import Typography from '@mui/material/Typography'
 import ToggleButton from '@mui/material/ToggleButton'
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup'
 import ViewListIcon from '@mui/icons-material/ViewList';
@@ -57,6 +58,19 @@ const UsersPage = () => {
                 </ToggleButtonGroup>
             </Box> 
 
+            {!filteredUsers.length && (
+                <Box sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    height: '100dvh'
+                }}>
+                    <Typography variant='h5'>
+                        User does not exist.
+                    </Typography>
+                </Box>
+            )}
             <Box
                 sx={{
                     display: viewMode === 'grid' ? 'grid' : 'flex',
