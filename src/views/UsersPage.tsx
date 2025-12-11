@@ -10,6 +10,7 @@ import ViewModuleIcon from '@mui/icons-material/ViewModule';
 import UsersList from '../components/UsersList'
 
 import Filter from '../components/Filter'
+import type { User } from '../types/user'
 
 type ViewMode = 'list' | 'grid'
 
@@ -26,6 +27,7 @@ const UsersPage = () => {
 
     useEffect(() => {
         loadUsers()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [filter])
 
     const handleViewChange = (_event: MouseEvent<HTMLElement>, newView: ViewMode | null) => {
@@ -34,7 +36,7 @@ const UsersPage = () => {
         }
     }
 
-    const filteredUsers = users.filter((user) => user.name.toLowerCase().includes(filter.toLowerCase()))
+    const filteredUsers = users.filter((user: User) => user.name.toLowerCase().includes(filter.toLowerCase()))
 
     return (
         <Box sx={{ p: 3 }}>
