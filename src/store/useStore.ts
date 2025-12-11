@@ -32,7 +32,7 @@ export const useStore = create<UserStore>()(
                     const users = await fetchUsers()
                     set({ users, isLoading: false })
                 } catch (error) {
-                    set({ error: (error as Error).message, isLoading: false })
+                    set({ users: [], error: (error as Error).message, isLoading: false })
                 }
             },
         }),
